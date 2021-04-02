@@ -62,7 +62,7 @@ public class UserRegistrationSystem
      */
     public static String validatingPassword(String password)
     {
-        if(Pattern.matches("(?=.*[A-Z]).{8,}",password))
+        if(Pattern.matches("(?=.*[A-Z])(?=.*[0-9]).{8,}",password))
         {
             return "valid";
         }
