@@ -29,10 +29,23 @@ public class UserRegistrationSystem
             return "invalid";
         }
     }
+    //UC3: validating email
+    public static String validateEmail(String email)
+    {
+        if(Pattern.matches("^[a-z0-9A-Z-_]+.[a-z0-9A-Z]*@[a-z0-9A-Z]+.([a-z0-9A-Z]{2,})*.([a-z0-9A-Z]){2,}$",email))
+        {
+            return "valid";
+        }
+        else
+        {
+            return "invalid";
+        }
+    }
 
     public static void main(String[] args)
     {
         System.out.println("first name: "+UserRegistrationSystem.validateFirstName("Rahul"));
         System.out.println("last name: "+UserRegistrationSystem.validateLastName("Guptha"));
+        System.out.println("email: "+UserRegistrationSystem.validateEmail("ab2c.cbd@gmail2.com.in"));
     }
 }
