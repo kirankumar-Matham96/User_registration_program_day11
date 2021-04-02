@@ -58,10 +58,11 @@ public class UserRegistrationSystem
     //UC5: validating password
     /*
     Rule1: contains minimum 8 characters
+    Rule2: contains minimum 1 uppercase letter
      */
     public static String validatingPassword(String password)
     {
-        if(Pattern.matches(".{8,}",password))
+        if(Pattern.matches("(?=.*[A-Z]).{8,}",password))
         {
             return "valid";
         }
@@ -77,6 +78,6 @@ public class UserRegistrationSystem
         System.out.println("last name: "+UserRegistrationSystem.validateLastName("Guptha"));
         System.out.println("email: "+UserRegistrationSystem.validateEmail("ab2c.cbd@gmail2.com.in"));
         System.out.println("mobile number: "+UserRegistrationSystem.validateMobileNumber("91 8688332960"));
-        System.out.println("password: "+UserRegistrationSystem.validatingPassword("ut438fdg7239^%$"));
+        System.out.println("password: "+UserRegistrationSystem.validatingPassword("ut438fTg7239^%$"));
     }
 }
