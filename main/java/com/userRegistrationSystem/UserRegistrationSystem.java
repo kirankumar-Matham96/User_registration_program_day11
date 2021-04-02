@@ -42,10 +42,24 @@ public class UserRegistrationSystem
         }
     }
 
+    //UC4: validating mobile number
+    public static String validateMobileNumber(String mobile_number)
+    {
+        if(Pattern.matches("^[0-9]{1,2}\\s[0-9]{10}",mobile_number))
+        {
+            return "valid";
+        }
+        else
+        {
+            return "invalid";
+        }
+    }
+
     public static void main(String[] args)
     {
         System.out.println("first name: "+UserRegistrationSystem.validateFirstName("Rahul"));
         System.out.println("last name: "+UserRegistrationSystem.validateLastName("Guptha"));
         System.out.println("email: "+UserRegistrationSystem.validateEmail("ab2c.cbd@gmail2.com.in"));
+        System.out.println("mobile number: "+UserRegistrationSystem.validateMobileNumber("91 8688332960"));
     }
 }
