@@ -17,8 +17,22 @@ public class UserRegistrationSystem
         }
     }
 
+    //UC2: validating last name
+    public static String validateLastName(String last_name)
+    {
+        if(Pattern.matches("^[A-Z][a-z]{2,}",last_name))
+        {
+            return "valid";
+        }
+        else
+        {
+            return "invalid";
+        }
+    }
+
     public static void main(String[] args)
     {
-        UserRegistrationSystem.validateFirstName("Rahul");
+        System.out.println("first name: "+UserRegistrationSystem.validateFirstName("Rahul"));
+        System.out.println("last name: "+UserRegistrationSystem.validateLastName("Guptha"));
     }
 }
