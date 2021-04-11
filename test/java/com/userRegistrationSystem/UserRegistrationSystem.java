@@ -1,89 +1,65 @@
-package com.userRegistrationSystem;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-class UserRegistrationSystemTest
-{
+public class UserRegistrationProgramTest {
+    
     @Test
-    public void givenFirstNameProper_returnValid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("valid",userRegistrationSystem.validateFirstName("Rahul"));
+    public void givenFirstName_whenProper_shouldReturnTrue() {
+        Assert.assertTrue(UserRegistrationProgram.validateFirstName("Kiran"));
     }
-
+    
     @Test
-    public void givenFirstNameNotProper_returnInvalid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("invalid",userRegistrationSystem.validateFirstName("rahul"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateFirstName("Ra"));
+    public void givenFirstName_whenShort_shouldReturnFalse() {
+        Assert.assertFalse(UserRegistrationProgram.validateFirstName("Ki"));
     }
-
+    
     @Test
-    public void givanLastNameProper_returnValid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("valid",userRegistrationSystem.validateLastName("Guptha"));
+    public void givenFirstName_whenSmallCaseStart_shouldReturnFalse() {
+        Assert.assertFalse(UserRegistrationProgram.validateFirstName("kiran"));
     }
-
+    
     @Test
-    public void givanLastNameNotProper_returnInvalid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("invalid",userRegistrationSystem.validateLastName("guptha"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateLastName("Gu"));
+    public void givenLastName_whenProper_shouldReturnTrue() {
+        Assert.assertTrue(UserRegistrationProgram.validateLastName("Kumar"));
     }
-
+    
     @Test
-    public void givenMobileNumberProper_returnValid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("valid",userRegistrationSystem.validateMobileNumber("91 8956237410"));
+    public void givenLastName_whenShort_shouldReturnFalse() {
+        Assert.assertFalse(UserRegistrationProgram.validateFirstName("Ku"));
     }
-
+    
     @Test
-    public void givenMobileNumberNotProper_returnInvalid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("invalid",userRegistrationSystem.validateMobileNumber("918956237410"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateMobileNumber("8956237410"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateMobileNumber("91 897410"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateMobileNumber("91 8956237410ftfg"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateMobileNumber("91 89562374108549"));
+    public void givenLastName_whenSmallCaseStart_shouldReturnFalse() {
+        Assert.assertFalse(UserRegistrationProgram.validateFirstName("kumar"));
     }
-
+    
     @Test
-    public void givenEmailProper_returnValid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("abc@gmail.com"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul@gmail.com"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul-100@gmail.com"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul.100@gmail.com"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul-100@Rahul.com"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul-100@Rahul.net"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul.100@Rahul.com.au"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul@1.com"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul@gmail.com.com"));
-        Assert.assertEquals("valid",userRegistrationSystem.validateEmail("Rahul+100@yahoo.com"));
+    public void givenEmail_WhenProper_ShouldReturnTrue() {
+        Assert.assertTrue(UserRegistrationProgram.validateEmail("kiran@gmail.com"));
     }
-
+    
     @Test
-    public void givenEmailNotProper_returnInvalid()
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul@.com.my"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul123@gmail.a"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul123@.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul123@.com.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail(".Rahul@Rahul.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul()*@gmail.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul@%*.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul..2002@gmail.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul.@gmail.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul@Rahul@gmail.com"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul@gmail.com.1a"));
-        Assert.assertEquals("invalid",userRegistrationSystem.validateEmail("Rahul@gmail.com.aa.au"));
+    public void givenEmail_WhenNotProper_ShouldReturnFalse() {
+        Assert.assertFalse(UserRegistrationProgram.validateEmail("kiran@.gmail.com"));
+    }
+    
+    @Test
+    public void givenPhoneNumber_WhenProper_ShouldReturnTrue() {
+        Assert.assertTrue(UserRegistrationProgram.validatePhoneNumber("91 8688332960"));
+    }
+    
+    @Test
+    public void givenPhoneNumber_WhenNotProper_ShouldReturnFalse() {
+        Assert.assertFalse(UserRegistrationProgram.validatePhoneNumber("8688332960"));
+    }
+    
+    @Test
+    public void givenPassword_whenProper_shouldReturnTrue() {
+        Assert.assertTrue(UserRegistrationProgram.validatePassword("yG95#dhma2se"));
+    }
+    
+    @Test
+    public void givenPassword_whenNotProper_shouldReturnFalse() {
+        Assert.assertFalse(UserRegistrationProgram.validatePassword("yma2se"));
     }
 }
