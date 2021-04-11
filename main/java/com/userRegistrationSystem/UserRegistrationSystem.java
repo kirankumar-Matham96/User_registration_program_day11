@@ -1,125 +1,105 @@
-package com.userRegistrationSystem;
+package comUserValidation;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class UserRegistrationSystem
-{
-    //UC1: validating first name
-    public  String validateFirstName(String first_name)
-    {
-        if(Pattern.matches("^[A-Z][a-z]{2,}",first_name))
-        {
-            return "valid";
-        }
-        else
-        {
-            return "invalid";
-        }
-    }
-
-    //UC2: validating last name
-    public  String validateLastName(String last_name)
-    {
-        if(Pattern.matches("^[A-Z][a-z]{2,}",last_name))
-        {
-            return "valid";
-        }
-        else
-        {
-            return "invalid";
-        }
-    }
-    //UC3: validating email
-    public  String validateEmail(String email)
-    {
-        if(Pattern.matches("^[a-z0-9A-Z-_]+(\\.[a-z0-9A-Z])*@[a-z0-9A-Z]+\\.([a-z0-9A-Z]{2,})?\\.([a-zA-Z]){2,}$",email))
-//        if(Pattern.matches("^(?!\\.)[A-Za-z0-9]+([._%+-]?[0-9])*@[A-Za-z0-9-]+\\.[a-zA-Z]{2,}(\\.[A-Za-z]{2,})?$",email))
-        {
-            return "valid";
-        }
-        else
-        {
-            return "invalid";
-        }
-    }
-
-    //UC4: validating mobile number
-    public  String validateMobileNumber(String mobile_number)
-    {
-        if(Pattern.matches("^[0-9]{1,2}\\s[0-9]{10}",mobile_number))
-        {
-            return "valid";
-        }
-        else
-        {
-            return "invalid";
-        }
-    }
-
-    //UC5: validating password
+public class UserRegistrationProgram {
+    
     /*
-    Rule1: contains minimum 8 characters
-    Rule2: contains minimum 1 uppercase letter
+     * UC-1: validating first name
      */
-    public  String validatingPassword(String password)
-    {
-        if(Pattern.matches("(?=.*[A-Z])(?=.*[0-9]).{8,}",password))
-        {
-            return "valid";
-        }
-        else
-        {
-            return "invalid";
-        }
+    public static boolean validateFirstName(String firstName) {
+        return Pattern.matches("^[A-Z]{1}[a-z]{2,}", firstName);
     }
-
+    
+    /*
+     * UC-2: validating last name
+     */
+    public static boolean validateLastName(String lastName) {
+        return Pattern.matches("^[A-Z]{1}[a-z]{2,}", lastName);
+    }
+    
+    /*
+     * UC-3: validating email
+     */
+    public static boolean validateEmail(String email) {
+        return Pattern.matches("^(?!\\.)[A-Za-z0-9]+([._%+-]?[0-9])*@[A-Za-z0-9-]+\\.[a-zA-Z]{2,}(\\.[A-Za-z]{2,})?$", email);
+    }
+    
+    /*
+     * UC-4: validating predefined mobile number
+     */
+    public static boolean validatePhoneNumber(String phoneNumber) {
+        return Pattern.matches("^[91]{2}\\s[0-9]{10}", phoneNumber);
+    }
+    
+    /*
+     * UC-5 to UC-8: validating password
+     *
+     *  Rule1: minimum 8 characters
+     *  Rule2: minimum 1 upper-case
+     *  Rule3: minimum 1 numeric
+     *  Rule4: Exactly 1 special character
+     */
+    public static boolean validatePassword(String userInput) {
+        String[] regexExpressions = {"[a-zA-Z0-9][@|#|$|%|&]{1,1}[a-zA-Z0-9]$", "(?=.[A-Z])(?=.[0-9])(?=.*[@|#|$|%|&])[A-Za-z0-9@#$%&]{8,}$"};
+        for(String regex : regexExpressions) {
+            if(!userInput.matches(regex)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     /*
      * UC-9: All types of email
+     * adding email to array-list and calling validateEmail method
      */
-    //adding email to array-list and calling validateEmail method
-    public  void addToEmailList(String emailToAdd)
-    {
+    public static void addToEmailList(String emailToAdd) {
         ArrayList<String> email = new ArrayList<String>();
-
-        int i = 0;
+        
         email.add(emailToAdd);
-        System.out.println(email.get(i)+": "+validateEmail(email.get(i)));
-        i++;
+        
+        for(int i = 0; i < email.size(); i++) {
+            System.out.println(email.get(i) + ": " + validateEmail(email.get(i)));
+        }
     }
-
-    public static void main(String[] args)
-    {
-        UserRegistrationSystem userRegistrationSystem = new UserRegistrationSystem();
-        System.out.println("first name: "+userRegistrationSystem.validateFirstName("Rahul"));
-        System.out.println("last name: "+userRegistrationSystem.validateLastName("Guptha"));
-        System.out.println("email: "+userRegistrationSystem.validateEmail("ab2c.cbd@gmail2.com.in"));
-        System.out.println("mobile number: "+userRegistrationSystem.validateMobileNumber("91 8688332960"));
-        System.out.println("password: "+userRegistrationSystem.validatingPassword("ut438fTg7239^%$"));
-
+    
+    //main method
+    public static void main(String[] args) {
+        String firstName = "Rahul";
+        String lastName = "Shinde";
+        String phoneNumber = "91 8688332960";
+        String passWord = "9P#lesLd65ef";
+        
+        System.out.println("first name: " + validateFirstName(firstName));
+        System.out.println("last name: " + validateLastName(lastName));
+        System.out.println("phone numbar: " + validatePhoneNumber(phoneNumber));
+        System.out.println("password: " + validatePassword(passWord));
+        
         //valid email
-        userRegistrationSystem.addToEmailList("Rahul@gmail.com");
-        userRegistrationSystem.addToEmailList("Rahul-100@gmail.com");
-        userRegistrationSystem.addToEmailList("Rahul.100@gmail.com");
-        userRegistrationSystem.addToEmailList("Rahul-100@Rahul.com");
-        userRegistrationSystem.addToEmailList("Rahul-100@Rahul.net");
-        userRegistrationSystem.addToEmailList("Rahul.100@Rahul.com.au");
-        userRegistrationSystem.addToEmailList("Rahul@1.com");
-        userRegistrationSystem.addToEmailList("Rahul@gmail.com.com");
-        userRegistrationSystem.addToEmailList("Rahul+100@yahoo.com");
-
+        addToEmailList("Rahul@gmail.com");
+        addToEmailList("Rahul-100@gmail.com");
+        addToEmailList("Rahul.100@gmail.com");
+        addToEmailList("Rahul-100@Rahul.com");
+        addToEmailList("Rahul-100@Rahul.net");
+        addToEmailList("Rahul.100@Rahul.com.au");
+        addToEmailList("Rahul@1.com");
+        addToEmailList("Rahul@gmail.com.com");
+        addToEmailList("Rahul+100@yahoo.com");
+        
         //invalid email
-        userRegistrationSystem.addToEmailList("Rahul@.com.my");
-        userRegistrationSystem.addToEmailList("Rahul123@gmail.a");
-        userRegistrationSystem.addToEmailList("Rahul123@.com");
-        userRegistrationSystem.addToEmailList("Rahul123@.com.com");
-        userRegistrationSystem.addToEmailList(".Rahul@Rahul.com");
-        userRegistrationSystem.addToEmailList("Rahul()*@gmail.com");
-        userRegistrationSystem.addToEmailList("Rahul@%*.com");
-        userRegistrationSystem.addToEmailList("Rahul..2002@gmail.com");
-        userRegistrationSystem.addToEmailList("Rahul.@gmail.com");
-        userRegistrationSystem.addToEmailList("Rahul@Rahul@gmail.com");
-        userRegistrationSystem.addToEmailList("Rahul@gmail.com.1a");
-        userRegistrationSystem.addToEmailList("Rahul@gmail.com.aa.au");
+        addToEmailList("Rahul@.com.my");
+        addToEmailList("Rahul123@gmail.a");
+        addToEmailList("Rahul123@.com");
+        addToEmailList("Rahul123@.com.com");
+        addToEmailList(".Rahul@Rahul.com");
+        addToEmailList("Rahul()*@gmail.com");
+        addToEmailList("Rahul@%*.com");
+        addToEmailList("Rahul..2002@gmail.com");
+        addToEmailList("Rahul.@gmail.com");
+        addToEmailList("Rahul@Rahul@gmail.com");
+        addToEmailList("Rahul@gmail.com.1a");
+        addToEmailList("Rahul@gmail.com.aa.au");
     }
 }
